@@ -28,16 +28,20 @@ public class GameController : MonoBehaviour
 
     private IEnumerator RestartGame(float waitForSeconds)
     {
+        // Waiting a few seconds so the player can see the score she got
         yield return new WaitForSeconds(waitForSeconds);
 
         currentScore = 0;
         SetScoreText();
 
         startGameText.SetActive(true);
+
+        // By setting the script back to enabled, the Update method starts being called again
         enabled = true;
 
         ball.Restart();
 
+        // We need to make sure the pins will start scoring again
         foreach (var pin in pins)
             pin.pinWasHitThisRound = false;
     }
